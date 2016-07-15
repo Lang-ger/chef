@@ -520,5 +520,11 @@ This error is most often caused by network issues (proxies, etc) outside of chef
         super "Found multiple matching resources. #{matches_info.join("\n")}"
       end
     end
+
+    class FileIntegrityCompromise < RuntimeError
+      def initialize(orig_cksum, current_cksum)
+        super "Original checksum for cookbook file (#{orig_cksum}) does not match existing content checksum (#{current_cksum})"
+      end
+    end
   end
 end
